@@ -1,0 +1,289 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Liberfly API",
+        "description": "Liberfly API test",
+        "termsOfService": "",
+        "contact": {
+            "email": "matheusroberttjmelo@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api": {},
+        "/api/auth/signin": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Autenticação do usuário",
+                "operationId": "66b11a29e27d0b9925d743d42b5473b2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "teste@gmail.com",
+                                    "password": "123456789"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário autenticado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/api/auth/signup": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Criação do usuário",
+                "operationId": "362f9698c074c61bd138506be021488c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Teste",
+                                    "email": "teste@gmail.com",
+                                    "password": "123456789"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário autenticado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "get": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Logout do usuário",
+                "operationId": "d011f307fdc38a8d4499994e35642dd5",
+                "responses": {
+                    "204": {
+                        "description": "Usuário deslogado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/book-stores": {
+            "get": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Lista de livros",
+                "operationId": "f37a427d5ccb96b27187ae1f3bcb2801",
+                "responses": {
+                    "200": {
+                        "description": "Lista de livros"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Cria um livro",
+                "operationId": "9a16ea6c2ab1e641c34cc3e08da64514",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "isbn": {
+                                        "type": "integer"
+                                    },
+                                    "value": {
+                                        "type": "decimal"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Teste",
+                                    "isbn": 9783161484100,
+                                    "value": 39.99
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Livro criado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/api/book-stores/{id}": {
+            "get": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Lista de livros",
+                "operationId": "6eb8c34172a0e53547c51e5d42dc02af",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Buscar por livro",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Livro"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Atualiza um livro",
+                "operationId": "aa57b5c8bd17c70ffcb4dc93f3a64cd4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "isbn": {
+                                        "type": "integer"
+                                    },
+                                    "value": {
+                                        "type": "decimal"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Teste",
+                                    "isbn": 9783161484100,
+                                    "value": 39.99
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Livro atualizado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "404": {
+                        "description": "BookStore not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "Deleta um livro",
+                "operationId": "df46a659a3681fd4600fe1a100bebbed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Livro"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
