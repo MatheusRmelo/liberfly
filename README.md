@@ -42,6 +42,7 @@ Depois rode o serve em Laravel `php artisan serve` <br />
 
 Depois acesse a url **http://127.0.0.1:8000/docs** e pronto você já tem acesso a documentação da API
 
+OBS: Se o Swagger não funcionar gere novamente os arquivos usando `php artisan l5-swagger:generate`
 # Executando os testes
 Depois de configurar o laravel local rode o comando <br />
 `php artisan test`
