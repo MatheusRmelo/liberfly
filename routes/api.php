@@ -16,18 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix('auth')->group(function(){
     Route::post('signin', [AuthController::class, 'signIn']);
     Route::post('signup', [AuthController::class, 'signUp']);
-    Route::middleware('auth:sanctum')->group(function(){
+    Route::middleware('auth.jwt')->group(function(){
         Route::get('logout', [AuthController::class, 'logout']);
     });
 });
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth.jwt')->group(function(){
     Route::apiResource('book-stores', BookStoreController::class);
 });

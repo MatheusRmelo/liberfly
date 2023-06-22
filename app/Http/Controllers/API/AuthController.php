@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\SignUpRequest;
 use App\Http\Requests\Auth\SignInRequest;
 use App\Models\User;
 use App\Traits\ApiResponse;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -25,7 +26,11 @@ class AuthController extends Controller
             ]);
         }
 
-        return $this->success($user->createToken($request->userAgent() ?? "no device")->plainTextToken, 'Make Login Successful');
+        return $this->success(JWT::encode([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+        ], env('JWT_SECRET_KEY'), 'HS256'), 'Make Login Successful');
     }
 
     public function signUp(SignUpRequest $request)
@@ -43,12 +48,15 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return $this->create($user->createToken($request->userAgent() ?? "no device")->plainTextToken, 'Create user successfully');
+        return $this->create(JWT::encode([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email
+        ], env('JWT_SECRET_KEY'), 'HS256'), 'Create user successfully');
     }
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
         return response()->noContent();
     }
 }

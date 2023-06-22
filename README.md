@@ -10,7 +10,7 @@ Configure a consulta com o banco de dados no .env
 DB_CONNECTION=mysql
 DB_HOST=database
 DB_PORT=3306
-DB_DATABASE=searchandstay
+DB_DATABASE=liberfly
 DB_USERNAME=admin
 DB_PASSWORD=admin@123456
 ```
@@ -19,7 +19,7 @@ DB_PASSWORD=admin@123456
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=searchandstay
+DB_DATABASE=liberfly
 DB_USERNAME=root
 DB_PASSWORD=
 ```

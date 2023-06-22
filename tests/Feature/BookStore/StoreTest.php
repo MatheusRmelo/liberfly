@@ -4,6 +4,7 @@ namespace Tests\Feature\BookStore;
 
 use App\Models\User;
 use Database\Seeders\Tests\TestUserSeeder;
+use Firebase\JWT\JWT;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,9 +17,14 @@ class StoreTest extends TestCase
     {
         parent::setUp();
         $this->seed(TestUserSeeder::class);
-        $this->actingAs(User::find(1));
+        $user = User::find(1);
         $this->withHeaders([
-            'Accept' => 'application/json'
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.JWT::encode([
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email
+            ], env('JWT_SECRET_KEY'), 'HS256')
         ]);
     }
 

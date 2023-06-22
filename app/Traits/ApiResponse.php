@@ -50,4 +50,13 @@ trait ApiResponse
             'message' => $message,
         ], 404);
     }
+
+    protected function serverFailed($result = null, string $message = 'Falha ao se comunicar com o servidor') : JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'result' => $result,
+            'message' => $message,
+        ], 500);
+    }
 }
